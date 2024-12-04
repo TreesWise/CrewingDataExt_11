@@ -222,8 +222,8 @@ python-Levenshtein==0.21.1
 python-multipart==0.0.6
 pytils==0.4.1
 pytz==2023.3
-pywin32==308
-pywinpty==2.0.14
+#pywin32==308
+#pywinpty==2.0.14
 pyxnat==1.6.2
 PyYAML==6.0
 pyzmq==25.1.2
@@ -267,7 +267,7 @@ tensorboard-plugin-wit==1.8.1
 tensorflow==2.18.0
 tensorflow-estimator==2.13.0
 tensorflow-io-gcs-filesystem==0.31.0
-tensorflow_intel==2.18.0
+#tensorflow_intel==2.18.0
 termcolor==2.5.0
 terminado==0.18.1
 Theano==1.0.5
