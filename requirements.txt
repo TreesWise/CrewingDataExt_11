@@ -87,7 +87,8 @@ google-auth-oauthlib==1.0.0
 google-pasta==0.2.0
 greenlet==2.0.2
 grpcio==1.68.1
-gunicorn==23.0.0
+gunicorn
+#gunicorn==23.0.0
 h11==0.14.0
 h5py==3.12.1
 helper==2.5.0
