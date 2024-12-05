@@ -1,10 +1,3 @@
-import sys
-if sys.version_info >= (3, 10):
-    import collections
-    if not hasattr(collections, 'Sequence'):
-        import collections.abc
-        collections.Sequence = collections.abc.Sequence
-
 import pickle
 from fastapi import FastAPI, File, UploadFile, BackgroundTasks, HTTPException, status, Depends
 from datetime import datetime, timedelta
