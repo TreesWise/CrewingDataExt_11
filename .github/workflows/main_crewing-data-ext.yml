@@ -28,10 +28,7 @@ jobs:
           source venv/bin/activate
       
       - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt
-
+        run: pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
@@ -69,4 +66,4 @@ jobs:
         with:
           app-name: 'crewing-data-ext'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_38A23875584E43DBBF10946E89727AE7 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D547633BF44945DD8E4444AFCBF7F0B0 }}
