@@ -56,6 +56,10 @@ jobs:
         with:
           name: python-app
 
+      # Unzip the artifact
+      - name: Unzip Artifact
+        run: unzip release.zip
+        
       # Install dependencies in a virtual environment
       - name: Install Dependencies
         run: |
@@ -63,10 +67,7 @@ jobs:
           source venv/bin/activate
           pip install -r requirements.txt
 
-      # Unzip the artifact
-      - name: Unzip Artifact
-        run: unzip release.zip
-
+          
       # Deploy to Azure Web App
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
