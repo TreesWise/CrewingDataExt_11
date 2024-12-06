@@ -182,7 +182,7 @@ pandas==2.2.3
 pandocfilters==1.5.1
 parso==0.8.3
 passlib==1.7.4
-pathlib==*; python_version < '3.4
+pathlib==*; python_version < '3.4'
 #pathlib==1.0.1
 pillow==10.2.0
 pip-tools==7.4.1
