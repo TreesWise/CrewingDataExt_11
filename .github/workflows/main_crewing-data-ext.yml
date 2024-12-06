@@ -1,6 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-# More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
+# Docs for Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 
 name: Build and deploy Python app to Azure Web App - crewing-data-ext
 
@@ -15,55 +13,58 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      # Checkout code from GitHub
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      - name: Set up Python version
+      # Set up Python version
+      - name: Set Up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Create and start virtual environment
+      # Install dependencies in a virtual environment
+      - name: Install Dependencies
         run: |
           python -m venv venv
           source venv/bin/activate
-      
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-        
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+          pip install -r requirements.txt
 
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+      # Zip only the necessary application files
+      - name: Zip Artifact for Deployment
+        run: |
+          zip -r release.zip . \
+            -x "venv/*" ".git/*" ".github/*" "__pycache__/*"
 
-      - name: Upload artifact for deployment jobs
+      # Upload artifact for deployment
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: |
-            release.zip
-            !venv/
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+
     steps:
-      - name: Download artifact from build job
+      # Download artifact created in the build job
+      - name: Download Artifact
         uses: actions/download-artifact@v4
         with:
           name: python-app
 
-      - name: Unzip artifact for deployment
+      # Unzip the artifact
+      - name: Unzip Artifact
         run: unzip release.zip
 
-      
-      - name: 'Deploy to Azure Web App'
+      # Deploy to Azure Web App
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'crewing-data-ext'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D547633BF44945DD8E4444AFCBF7F0B0 }}
+          app-name: 'crewing-data-ext' # Replace with your app name if incorrect
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          slot-name: 'production'
